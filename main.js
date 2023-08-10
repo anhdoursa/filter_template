@@ -37,8 +37,32 @@ function init_threeScene(spec) {
   // threeCube.frustumCulled = false;
   // threeStuffs.faceObject.add(threeCube);
 
-  const mesh = loadModel()
-  threeStuffs.faceObject.add(mesh);
+  // Create the JSONLoader for our hat:
+  const loader = new THREE.BufferGeometryLoader();
+
+  // Load our cool hat:
+  loader.load(
+    'models/luffys_hat.json',
+    function (geometry, materials) {
+      // we create our Hat mesh
+      const mat = new THREE.MeshBasicMaterial({
+        map: new THREE.TextureLoader().load("models/Texture.jpg")
+      });
+      const hatMesh = new THREE.Mesh(geometry, mat);
+
+      hatMesh.scale.multiplyScalar(1.2);
+      hatMesh.rotation.set(0, -40, 0);
+      hatMesh.position.set(0.0, 0.6, 0.0);
+      hatMesh.frustumCulled = false;
+      hatMesh.side = THREE.DoubleSide;
+
+      threeStuffs.faceObject.add(hatMesh);
+    }
+  )
+
+  // CREATE LIGHT
+  const ambientLight = new THREE.AmbientLight(0XFFFFFF, 0.8);
+  threeStuffs.scene.add(ambientLight);
 
 
   // CREATE THE CAMERA:
