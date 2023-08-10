@@ -9,6 +9,21 @@ function detect_callback(faceIndex, isDetected) {
   }
 }
 
+function loadModel() {
+  let mesh
+  const loader = new GLTFLoader();
+  // loader.setDRACOLoader(
+  //   new DRACOLoader().setDecoderPath(
+  //     "https://unpkg.com/three@0.154.0/examples/jsm/libs/draco/gltf/"
+  //   )
+  // );
+  loader.load('./models/luffys_straw_hat.glb', function (gltf) {
+    mesh = gltf.scene;
+  });
+
+  return mesh;
+}
+
 
 // build the 3D. called once when Jeeliz Face Filter is OK:
 function init_threeScene(spec) {
@@ -22,17 +37,8 @@ function init_threeScene(spec) {
   // threeCube.frustumCulled = false;
   // threeStuffs.faceObject.add(threeCube);
 
-
-  const loader = new THREE.BufferGeometryLoader()
-  // Load our cool hat
-  loader.load(
-    'models/luffys_straw_hat.json',
-    function (geometry, materials) {
-      const hatMesh = new THREE.Mesh(geometry, materials)
-      hatMesh.scale.multiplyScalar(0.1);
-      threeStuffs.faceObject.add(hatMesh);
-    }
-  )
+  const mesh = loadModel()
+  threeStuffs.faceObject.add(mesh);
 
 
   // CREATE THE CAMERA:
