@@ -15,7 +15,7 @@ function init_threeScene(spec) {
   spec.threeCanvasId = 'threeCanvas'; // enable 2 canvas mode
   const threeStuffs = JeelizThreeHelper.init(spec, detect_callback);
 
-   // CREATE A CUBE:
+  // CREATE A CUBE:
   const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
   const cubeMaterial = new THREE.MeshNormalMaterial();
   const threeCube = new THREE.Mesh(cubeGeometry, cubeMaterial);
@@ -28,24 +28,24 @@ function init_threeScene(spec) {
 
 
 // entry point:
-function main(){
+function main() {
   JeelizResizer.size_canvas({
     canvasId: 'jeeFaceFilterCanvas',
-    callback: function(isError, bestVideoSettings){
+    callback: function (isError, bestVideoSettings) {
       init_faceFilter(bestVideoSettings);
     }
   })
 }
 
 
-function init_faceFilter(videoSettings){
+function init_faceFilter(videoSettings) {
   JEELIZFACEFILTER.init({
     antialias: false,
     canvasId: 'jeeFaceFilterCanvas',
-    NNCPath: '../../../neuralNets/', // root of NN_DEFAULT.json file
+    NNCPath: './neuralNets/', // root of NN_DEFAULT.json file
     maxFacesDetected: 1,
-    callbackReady: function(errCode, spec){
-      if (errCode){
+    callbackReady: function (errCode, spec) {
+      if (errCode) {
         console.log('AN ERROR HAPPENS. ERR =', errCode);
         return;
       }
@@ -55,7 +55,7 @@ function init_faceFilter(videoSettings){
     },
 
     // called at each render iteration (drawing loop):
-    callbackTrack: function(detectState){
+    callbackTrack: function (detectState) {
       JeelizThreeHelper.render(detectState, THREECAMERA);
     }
   }); //end JEELIZFACEFILTER.init call
