@@ -11,7 +11,7 @@ function detect_callback(faceIndex, isDetected) {
 
 function loadModel() {
   let mesh
-  const loader = new GLTFLoader();
+  const loader = new THREE.GLTFLoader();
   // loader.setDRACOLoader(
   //   new DRACOLoader().setDecoderPath(
   //     "https://unpkg.com/three@0.154.0/examples/jsm/libs/draco/gltf/"
