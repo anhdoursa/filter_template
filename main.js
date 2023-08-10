@@ -16,11 +16,24 @@ function init_threeScene(spec) {
   const threeStuffs = JeelizThreeHelper.init(spec, detect_callback);
 
   // CREATE A CUBE:
-  const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-  const cubeMaterial = new THREE.MeshNormalMaterial();
-  const threeCube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-  threeCube.frustumCulled = false;
-  threeStuffs.faceObject.add(threeCube);
+  // const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+  // const cubeMaterial = new THREE.MeshNormalMaterial();
+  // const threeCube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+  // threeCube.frustumCulled = false;
+  // threeStuffs.faceObject.add(threeCube);
+
+
+  const loader = new THREE.BufferGeometryLoader()
+  // Load our cool hat
+  loader.load(
+    'models/luffys_straw_hat.json',
+    function (geometry, materials) {
+      const hatMesh = new THREE.Mesh(geometry, materials)
+      hatMesh.scale.multiplyScalar(0.1);
+      threeStuffs.faceObject.add(hatMesh);
+    }
+  )
+
 
   // CREATE THE CAMERA:
   THREECAMERA = JeelizThreeHelper.create_camera();
