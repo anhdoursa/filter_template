@@ -9,25 +9,9 @@ function detect_callback(faceIndex, isDetected) {
   }
 }
 
-function loadModel() {
-  let mesh
-  const loader = new THREE.GLTFLoader();
-  // loader.setDRACOLoader(
-  //   new DRACOLoader().setDecoderPath(
-  //     "https://unpkg.com/three@0.154.0/examples/jsm/libs/draco/gltf/"
-  //   )
-  // );
-  loader.load('./models/luffys_straw_hat.glb', function (gltf) {
-    mesh = gltf.scene;
-  });
-
-  return mesh;
-}
-
-
 // build the 3D. called once when Jeeliz Face Filter is OK:
 function init_threeScene(spec) {
-  spec.threeCanvasId = 'threeCanvas'; // enable 2 canvas mode
+  // spec.threeCanvasId = 'threeCanvas'; // enable 2 canvas mode
   const threeStuffs = JeelizThreeHelper.init(spec, detect_callback);
 
   // CREATE A CUBE:
